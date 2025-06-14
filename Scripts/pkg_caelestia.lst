@@ -1,0 +1,26 @@
+# HyDE-Caelestia Package List
+# Additional packages required for Caelestia-shell integration
+
+# Quickshell and Qt dependencies
+quickshell-git
+qt6-declarative
+qt6-wayland
+qt6-svg
+qt6-multimedia
+
+# Additional development tools (optional)
+qt6-tools
+qt6-doc
+
+# Audio visualization (for Cava integration)
+cava
+
+# Additional fonts for better UI rendering
+ttf-material-design-icons-desktop-git
+ttf-material-symbols-git
+
+# Python dependencies for beat detection
+python-numpy
+python-scipy
+python-matplotlib
+

@@ -1,0 +1,21 @@
+[Unit]
+Description=Caelestia Shell - Modern Desktop Shell
+After=graphical-session.target
+Wants=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/quickshell -c caelestia
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=10
+
+# Environment
+Environment=QT_QPA_PLATFORM=wayland
+Environment=QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+[Install]
+WantedBy=default.target
+

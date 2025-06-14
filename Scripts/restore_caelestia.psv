@@ -1,0 +1,15 @@
+# HyDE-Caelestia Configuration Restoration List
+# Additional configuration files for Caelestia-shell
+
+# Quickshell configuration
+S|${HOME}/.config/quickshell|caelestia|quickshell-git
+
+# Systemd user services
+S|${HOME}/.config/systemd/user|caelestia-shell.service|systemd
+
+# Additional shell scripts
+S|${HOME}/.local/bin|hyde-caelestia-theme-sync|quickshell-git
+
+# Desktop entries (optional)
+P|${HOME}/.local/share/applications|caelestia-shell.desktop|quickshell-git
+

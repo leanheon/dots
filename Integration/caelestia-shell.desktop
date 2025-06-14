@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Caelestia Shell
+Comment=Modern desktop shell for Hyprland
+Exec=quickshell -c caelestia
+Icon=preferences-desktop
+Type=Application
+Categories=System;Settings;
+Keywords=shell;desktop;hyprland;quickshell;
+StartupNotify=false
+NoDisplay=true
+

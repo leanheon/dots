@@ -1,0 +1,190 @@
+# Example configuration file for HyDE
+# Environment variables should be on top
+# Add your custom configuration in '~/.config/hyde/config.toml'
+
+"$schema" = "./schema.json"
+
+WARP_ENABLE_WAYLAND = 1
+
+[wallpaper]
+custom_paths = ["$HOME/Pictures/Wallpapers"]
+backend = "swww"
+
+[wallpaper.swww]
+framerate = 60
+duration = 1
+transition_next = "grow"
+transition_prev = "outer"
+transition_default = "grow"
+
+[rofi]
+scale = 10
+
+[rofi.hyprlock]
+scale = 10
+
+[rofi.animation]
+scale = 8
+
+[rofi.glyph]
+scale = 8
+
+[rofi.launch]
+scale = 5
+
+[rofi.cliphist]
+scale = 8
+
+[rofi.wallpaper]
+scale = 8
+
+[rofi.emoji]
+style = 2
+scale = 8
+
+[rofi.theme]
+scale = 6
+
+[rofi.keybind.hint]
+delimiter = "\t"
+width = "40em"
+height = "40em"
+line = 16
+
+[rofi.bookmark]
+file = "$HOME/.config/hyde/bookmarks.lst"
+
+[rofi.search]
+file = "$HOME/.config/hyde/search.lst"
+
+[wlogout]
+style = 2
+
+[battery.notify]
+timer = 120
+notify = 1140
+interval = 5
+dock = true
+
+[battery.notify.threshold]
+full = 90
+critical = 10
+low = 20
+unplug = 80
+
+[battery.notify.execute]
+unplug = ""
+low = ""
+critical = "systemctl suspend"
+charging = ""
+discharging = ""
+
+[keybind.hint]
+
+[screenshot]
+annotation_tool = "swappy"
+annotation_pre_command = []
+annotation_post_command = [""]
+
+[wallbash]
+skip_template = [""]
+
+[waybar]
+font = "JetBrainsMono Nerd Font"
+scale = 30
+
+[weather]
+temperature_unit = "c"
+time_format = "24h"
+windspeed_unit = "km/h"
+show_icon = true
+show_location = true
+show_today = true
+forecast_days = 3
+location = ""
+
+[cava.stdout]
+max_instances = 1
+bar = "▁▂▃▄▅▆▇█"
+width = 20
+range = 7
+standby = "🎶"
+
+[cava.hyprlock]
+max_instances = 1
+bar = "🌑🌒🌓🌔🌕🌖🌗🌘"
+width = 20
+range = 7
+standby = "🎶"
+
+[cava.waybar]
+max_instances = 1
+bar = "▁▂▃▄▅▆▇█"
+width = 20
+range = 7
+standby = "🎶"
+
+[hypr.config]
+sanitize = ['.*rgba\(.*,*,*,*,']
+
+[volume]
+notify = true
+steps = 5
+boost = false
+boost_limit = 150
+
+[brightness]
+notify = true
+steps = 5
+
+[sysmonitor]
+execute = "btop"
+commands = [
+    "btop",
+    "htop",
+    "top",
+]
+
+[notification]
+font = "mononoki Nerd Font"
+font_size = 8
+
+[hyprland]
+browser = "firefox"
+editor = "code"
+explorer = "dolphin"
+idle = "hypridle"
+lockscreen = "lockscreen.sh"
+quickapps = "kitty"
+terminal = "kitty"
+bar = "waybar"
+color_scheme = "prefer-light"
+gtk_theme = "Wallbash-Gtk"
+icon_theme = "Tela-circle-dracula"
+cursor_size = 24
+cursor_theme = "Bibata-Modern-Ice"
+button_layout = "appmenu:minimize,maximize,close"
+document_font_size = 10
+font = "Canterell"
+font_antialiasing = "rgba"
+font_hinting = "full"
+font_size = 10
+monospace_font = "CaskaydiaCove Nerd Font Mono"
+monospace_font_size = 9
+background_path = "$HYPRLOCK_BACKGROUND"
+
+[hyprland-start]
+apptray_bluetooth = "blueman-applet"
+auth_dialogue = "polkitkdeauth.sh"
+bar = "hyde-shell waybar --watch"
+battery_notify = "batterynotify.sh"
+dbus_share_picker = "dbus-update-activation-environment --systemd --all"
+idle_daemon = "hypridle"
+image_clipboard = "wl-paste --type image --watch cliphist store"
+network_manager = "nm-applet --indicator"
+notifications = "swaync"
+removable_media = "udiskie --no-automount --smart-tray"
+systemd_share_picker = "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+text_clipboard = "wl-paste --type text --watch cliphist store"
+wallpaper = "$scrPath/wallpaper.sh --global"
+xdg_portal_reset = "resetxdgportal.sh"
