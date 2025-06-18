@@ -58,7 +58,10 @@ P|${HOME}/.config/Code - OSS/User|settings.json|code
 P|${HOME}/.config/Code/User|settings.json|visual-studio-code-bin
 P|${HOME}/.config/VSCodium/User|settings.json|vscodium
 
-
+ Bar 
+P|${HOME}/.config/waybar|user-style.css|waybar
+S|${HOME}/.config/waybar|modules styles layouts menus config.jsonc theme.css style.css|waybar
+S|${HOME}/.local/share|waybar|waybar
 
  Terminal 
 P|${HOME}/.config|lsd|lsd
@@ -100,12 +103,15 @@ P|${HOME}/.config|code-flags.conf|visual-studio-code-bin
 P|${HOME}/.config|codium-flags.conf|vscodium
 P|${HOME}/.config|electron-flags.conf|electron
 
-
+ Notifications 
+S|${HOME}/.config|dunst|dunst
 
  Gaming 
 S|${HOME}/.config|MangoHud|mangohud
 
-
+ Launcher 
+P|${HOME}/.config|rofi|rofi
+S|${HOME}/.config|wlogout|wlogout
 
  Lock Screen 
 S|${HOME}/.config|swaylock|swaylock-effects
@@ -114,10 +120,3 @@ S|${HOME}/.config/hypr|hyprlock|hyprlock
 
  Idle daemon 
 P|${HOME}/.config/hypr|hypridle.conf|hypridle
-
-# Caelestia-shell UI replacement
-S|${HOME}/.config/quickshell|caelestia|quickshell-git
-S|${HOME}/.config/systemd/user|caelestia-shell.service|systemd
-S|${HOME}/.local/bin|hyde-caelestia-theme-sync|quickshell-git
-P|${HOME}/.local/share/applications|caelestia-shell.desktop|quickshell-git
-

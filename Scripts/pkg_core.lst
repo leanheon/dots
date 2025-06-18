@@ -25,6 +25,16 @@ qt5-graphicaleffects                                   # for sddm theme effects
 
 # --------------------------------------------------- // Window Manager
 hyprland                                               # wlroots-based wayland compositor
+# dunst                                                # notification daemon (replaced by caelestia-shell)
+# rofi-wayland                                         # application launcher (replaced by caelestia-shell)
+# waybar                                               # system bar (replaced by caelestia-shell)
+
+# --------------------------------------------------- // Hyde-Caelestia Integration
+qt6-base                                               # Qt6 base libraries for caelestia-shell
+qt6-declarative                                        # QML support for caelestia-shell
+qt6-svg                                                # SVG support for caelestia-shell
+qt6-multimedia                                         # multimedia support for caelestia-shell
+qt6-quickcontrols2                                     # UI controls for caelestia-shell
 swww                                                   # wallpaper
 hyprlock                                               # lock screen
 wlogout                                                # logout menu
@@ -33,14 +43,8 @@ hyprpicker                                             # color picker
 slurp                                                  # region select for screenshot/screenshare
 satty                                                  # Modern Screenshot Annotation
 cliphist                                               # clipboard manager
+wl-clip-persist                                        # Keep Wayland clipboard even after programs close (avoids crashes)
 hyprsunset                                             # blue light filter
-
-# --------------------------------------------------- // Caelestia-shell UI (replaces Waybar, Rofi, Dunst)
-quickshell-git                                         # QML-based shell framework
-qt6-declarative                                        # Qt6 QML module
-qt6-wayland                                            # Qt6 Wayland support
-qt6-svg                                                # Qt6 SVG support
-qt6-multimedia                                         # Qt6 multimedia support
 
 # --------------------------------------------------- // Dependencies
 polkit-gnome                                           # authentication agent

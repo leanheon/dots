@@ -15,8 +15,8 @@ Item {
     required property int padding
     required property int rounding
 
-    property bool showWallpapers: search.text.startsWith(`${LauncherConfig.actionPrefix}wallpaper `)
-    property var currentList: (showWallpapers ? wallpaperList : appList).item
+    readonly property bool showWallpapers: search.text.startsWith(`${Config.launcher.actionPrefix}wallpaper `)
+    property var currentList
 
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.bottom: parent.bottom
@@ -29,8 +29,9 @@ Item {
             name: "apps"
 
             PropertyChanges {
-                root.implicitWidth: LauncherConfig.sizes.itemWidth
-                root.implicitHeight: Math.max(empty.height, appList.height)
+                root.currentList: appList.item
+                root.implicitWidth: Config.launcher.sizes.itemWidth
+                root.implicitHeight: Math.max(empty.implicitHeight, appList.implicitHeight)
                 appList.active: true
             }
 
@@ -43,14 +44,15 @@ Item {
             name: "wallpapers"
 
             PropertyChanges {
-                root.implicitWidth: Math.max(LauncherConfig.sizes.itemWidth, wallpaperList.width)
-                root.implicitHeight: LauncherConfig.sizes.wallpaperHeight
+                root.currentList: wallpaperList.item
+                root.implicitWidth: Math.max(Config.launcher.sizes.itemWidth, wallpaperList.implicitWidth)
+                root.implicitHeight: Config.launcher.sizes.wallpaperHeight
                 wallpaperList.active: true
             }
         }
     ]
 
-    transitions: Transition {
+    Behavior on state {
         SequentialAnimation {
             NumberAnimation {
                 target: root
@@ -61,27 +63,15 @@ Item {
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: Appearance.anim.curves.standard
             }
-            PropertyAction {
-                targets: [appList, wallpaperList]
-                properties: "active"
-            }
-            ParallelAnimation {
-                NumberAnimation {
-                    target: root
-                    properties: "implicitWidth,implicitHeight"
-                    duration: Appearance.anim.durations.large
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: Appearance.anim.curves.emphasized
-                }
-                NumberAnimation {
-                    target: root
-                    property: "opacity"
-                    from: 0
-                    to: 1
-                    duration: Appearance.anim.durations.large
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: Appearance.anim.curves.standard
-                }
+            PropertyAction {}
+            NumberAnimation {
+                target: root
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: Appearance.anim.durations.small
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: Appearance.anim.curves.standard
             }
         }
     }
@@ -96,7 +86,6 @@ Item {
         anchors.right: parent.right
 
         sourceComponent: AppList {
-            padding: root.padding
             search: root.search
             visibilities: root.visibilities
         }
@@ -171,6 +160,8 @@ Item {
     }
 
     Behavior on implicitWidth {
+        enabled: root.visibilities.launcher
+
         NumberAnimation {
             duration: Appearance.anim.durations.large
             easing.type: Easing.BezierSpline
@@ -179,6 +170,8 @@ Item {
     }
 
     Behavior on implicitHeight {
+        enabled: root.visibilities.launcher
+
         NumberAnimation {
             duration: Appearance.anim.durations.large
             easing.type: Easing.BezierSpline

@@ -74,16 +74,18 @@ Item {
             topPadding: Appearance.padding.larger
             bottomPadding: Appearance.padding.larger
 
-            placeholderText: qsTr("Type \"%1\" for commands").arg(LauncherConfig.actionPrefix)
+            placeholderText: qsTr("Type \"%1\" for commands").arg(Config.launcher.actionPrefix)
             background: null
 
             onAccepted: {
                 const currentItem = list.currentList?.currentItem;
                 if (currentItem) {
                     if (list.showWallpapers) {
+                        if (Colours.scheme === "dynamic" && currentItem.modelData.path !== Wallpapers.actualCurrent)
+                            Wallpapers.previewColourLock = true;
                         Wallpapers.setWallpaper(currentItem.modelData.path);
                         root.visibilities.launcher = false;
-                    } else if (text.startsWith(LauncherConfig.actionPrefix)) {
+                    } else if (text.startsWith(Config.launcher.actionPrefix)) {
                         currentItem.modelData.onClicked(list.currentList);
                     } else {
                         Apps.launch(currentItem.modelData);

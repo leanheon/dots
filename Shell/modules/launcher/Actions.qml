@@ -42,6 +42,7 @@ Singleton {
             name: qsTr("Transparency")
             desc: qsTr("Change shell transparency")
             icon: "opacity"
+            disabled: true
 
             function onClicked(list: AppList): void {
                 root.autocomplete(list, "transparency");
@@ -68,13 +69,46 @@ Singleton {
             }
         },
         Action {
+            name: qsTr("Shutdown")
+            desc: qsTr("Shutdown the system")
+            icon: "power_settings_new"
+            disabled: !Config.launcher.enableDangerousActions
+
+            function onClicked(list: AppList): void {
+                list.visibilities.launcher = false;
+                Quickshell.execDetached(["systemctl", "poweroff"]);
+            }
+        },
+        Action {
+            name: qsTr("Reboot")
+            desc: qsTr("Reboot the system")
+            icon: "cached"
+            disabled: !Config.launcher.enableDangerousActions
+
+            function onClicked(list: AppList): void {
+                list.visibilities.launcher = false;
+                Quickshell.execDetached(["systemctl", "reboot"]);
+            }
+        },
+        Action {
+            name: qsTr("Logout")
+            desc: qsTr("Log out of the current session")
+            icon: "exit_to_app"
+            disabled: !Config.launcher.enableDangerousActions
+
+            function onClicked(list: AppList): void {
+                list.visibilities.launcher = false;
+                Quickshell.execDetached(["sh", "-c", "(uwsm stop | grep -q 'Compositor is not running' && loginctl terminate-user $USER) || uwsm stop"]);
+            }
+        },
+        Action {
             name: qsTr("Lock")
             desc: qsTr("Lock the current session")
             icon: "lock"
 
             function onClicked(list: AppList): void {
                 list.visibilities.launcher = false;
-                lock.running = true;
+                Quickshell.execDetached(["loginctl", "lock-session"]);
             }
         },
         Action {
@@ -84,19 +118,19 @@ Singleton {
 
             function onClicked(list: AppList): void {
                 list.visibilities.launcher = false;
-                sleep.running = true;
+                Quickshell.execDetached(["systemctl", "suspend-then-hibernate"]);
             }
         }
     ]
 
-    readonly property list<var> preppedActions: list.map(a => ({
+    readonly property list<var> preppedActions: list.filter(a => !a.disabled).map(a => ({
                 name: Fuzzy.prepare(a.name),
                 desc: Fuzzy.prepare(a.desc),
                 action: a
             }))
 
     function fuzzyQuery(search: string): var {
-        return Fuzzy.go(search.slice(LauncherConfig.actionPrefix.length), preppedActions, {
+        return Fuzzy.go(search.slice(Config.launcher.actionPrefix.length), preppedActions, {
             all: true,
             keys: ["name", "desc"],
             scoreFn: r => r[0].score > 0 ? r[0].score * 0.9 + r[1].score * 0.1 : 0
@@ -104,25 +138,14 @@ Singleton {
     }
 
     function autocomplete(list: AppList, text: string): void {
-        list.search.text = `${LauncherConfig.actionPrefix}${text} `;
-    }
-
-    Process {
-        id: lock
-
-        command: ["loginctl", "lock-session"]
-    }
-
-    Process {
-        id: sleep
-
-        command: ["systemctl", "suspend-then-hibernate"]
+        list.search.text = `${Config.launcher.actionPrefix}${text} `;
     }
 
     component Action: QtObject {
         required property string name
         required property string desc
         required property string icon
+        property bool disabled
 
         function onClicked(list: AppList): void {
         }
